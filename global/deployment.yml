@@ -1,0 +1,17 @@
+---
+name: (( param "Please specify a name for your BOSH deployment" ))
+
+resource_pools: (( param "Please define one or more resource pools for your BOSH deployment" ))
+disk_pools:     (( param "Please define one or more disk pools for your BOSH deployment" ))
+
+networks:
+- name: default
+  type: manual
+  subnets: (( param "Specify subnets for your BOSH vm's network" ))
+
+compilation: (( param "Define the compilation properties for your BOSH deployment (or nullify if bosh-lite)" ))
+
+update:
+  canaries: 1
+  max_in_flight: 1
+  serial: true

@@ -1,0 +1,22 @@
+---
+meta:
+  net:
+    range: (( param "What is the network address of the subnet BOSH-Lite will be on?" ))
+    gateway: (( param "What is the gateway of the network the BOSH-Lite will be on?" ))
+    static: (( param "Provide a list of static IPs/ranges in the subnet that BOSH-Lite will choose from" ))
+    reserved: (( param "Provide a list of reserved IP ranges for the subnet that BOSH-Lite will be on" ))
+    dns: (( param "What is the IP of the DNS server for this BOSH-Lite?" ))
+    subnet_id: (( param "What is the AWS subnet ID for this BOSH-Lite's subnet?")
+    security_groups: (( param "What security groups should be applied to the BOSH-Lite?" ))
+
+networks:
+- name: default
+  subnets:
+  - cloud_properties:
+      subnet: (( grab meta.net.subnet ))
+      security_groups: (( grab meta.net.security_groups ))
+    dns: (( grab meta.net.dns ))
+    gateway: (( grab meta.net.gateway ))
+    range: (( grab meta.net.range ))
+    reserved: (( grab meta.net.reserved ))
+    static: (( grab meta.net.static ))

@@ -1,0 +1,49 @@
+#!/bin/bash
+set -e
+
+if [[ -f ${HOME}/.saferc ]]; then
+  safe targets
+  read -p "Use this Vault for storing deployment credentials?  [yes or no] " YESNO
+  if [[ ${YESNO} != "yes" && ${YESNO} != "y" ]]; then
+    echo "ABORTING..."
+    exit 1
+  fi
+fi
+
+
+
+if ! safe read secret/handshake &>/dev/null; then
+  cat > ${ENVIRONMENT_ROOT}/credentials.yml <<EOF
+---
+meta:
+  vcap_password: (( param "Please generate a SHA-512 crypted password the vcap system user" ))
+  bosh:
+    blobstore:
+      agent:
+        pass: (( param "Please generate a password for the BOSH blobstore agent user" ))
+      director:
+        pass: (( param "Please generate a password for the BOSH blobstore director user" ))
+    db:
+      pass: (( param "Please generate a password for the BOSH database" ))
+    nats:
+      pass: (( param "Please generate a password for the NATS message bus" ))
+    users:
+      - name: admin
+        password: (( param "Please generate a password for the admin user" ))
+      - name: hm
+        password: (( param "Please generate a password for the hm user" ))
+EOF
+else
+  echo "Setting up credentials in vault, under ${VAULT_PREFIX}"
+  safe gen ${VAULT_PREFIX}/blobstore/agent    password -- \
+       gen ${VAULT_PREFIX}/blobstore/director password -- \
+       gen ${VAULT_PREFIX}/db                 password -- \
+       gen ${VAULT_PREFIX}/nats               password -- \
+       gen 30 ${VAULT_PREFIX}/users/admin        password -- \
+       gen 30 ${VAULT_PREFIX}/users/hm           password -- \
+       gen ${VAULT_PREFIX}/vcap               password -- \
+       fmt crypt-sha512 ${VAULT_PREFIX}/vcap  password crypt
+  safe tree ${VAULT_PREFIX} || true
+fi
+
+echo

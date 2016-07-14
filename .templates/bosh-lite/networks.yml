@@ -1,0 +1,16 @@
+---
+meta:
+  net:
+    range: (( param "What is the network address of the subnet BOSH-Lite will be on?" ))
+    gateway: (( param "What is the gateway of the network the BOSH-Lite will be on?" ))
+    static: (( param "Provide a list of static IPs/ranges in the subnet that BOSH-Lite will choose from" ))
+    reserved: (( param "Provide a list of reserved IP ranges for the subnet that BOSH-Lite will be on" ))
+
+networks:
+- name: default
+  subnets:
+  - cloud_properties: {}
+    gateway: (( grab meta.net.gateway ))
+    range: (( grab meta.net.range ))
+    reserved: (( grab meta.net.reserved ))
+    static: (( grab meta.net.static ))
