@@ -80,7 +80,7 @@ properties:
   ntp: (( grab meta.ntp ))
 
   warden_cpi:
-    host_ip: (( grab jobs.bosh.networks.0.static_ips.0 ))
+    host_ip: 10.254.50.4
     warden:
       connect_network: tcp
       connect_address: 127.0.0.1:7777
