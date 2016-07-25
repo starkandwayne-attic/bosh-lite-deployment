@@ -40,7 +40,7 @@ properties:
     provider: dav
   director:
     address: (( grab jobs.bosh.networks.default.static_ips.0 ))
-    cpi_job: vsphere_cpi
+    cpi_job: warden_cpi
     generate_vm_passwords: true
     ignore_missing_gateway: true
     db:
