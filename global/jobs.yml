@@ -24,4 +24,6 @@ jobs:
     release: garden-linux
   - name: port_forwarding
     release: port-forwarding
+  - name: iptables
+    release: port-forwarding
   properties: {} # required by bosh-init until https://github.com/cloudfoundry/bosh-init/issues/71 is resolved
