@@ -101,6 +101,10 @@ properties:
 
   port_forwarding:
     rules: (( grab meta.port_forwarding_rules ))
+  iptables:
+    nat:
+      POSTROUTING:
+      - -d 10.244.0.0/16 -j MASQUERADE
 
   compiled_package_cache:
     provider: local
