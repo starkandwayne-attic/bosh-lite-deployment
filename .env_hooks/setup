@@ -13,7 +13,7 @@ fi
 
 
 if ! safe read secret/handshake &>/dev/null; then
-  read -p "Vault is not working. Do you want to fix vault first? Otherwise you can generate credentails manully later. [yes or no]" YESNO
+  read -p "Vault is not working. Do you want to fix vault first? (Otherwise you have to generate credentials manually). [yes or no]" YESNO
   if [[ ${YESNO} != "no" && ${YESNO} != "n" ]]; then
     echo "ABORTING..."
     exit 1
