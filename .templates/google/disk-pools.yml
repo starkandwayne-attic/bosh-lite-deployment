@@ -1,0 +1,6 @@
+---
+disk_pools:
+- name: default
+  disk_size: 30_000
+  cloud_properties:
+    type: pd-standard
