@@ -1,0 +1,5 @@
+---
+networks:
+- name: default
+  type: manual
+  subnets: (( param "Specify your bosh-lite subnet" ))
