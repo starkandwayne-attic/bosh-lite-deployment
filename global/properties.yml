@@ -41,7 +41,7 @@ properties:
   director:
     address: (( grab jobs.bosh.networks.default.static_ips.0 ))
     cpi_job: warden_cpi
-    generate_vm_passwords: true
+    generate_vm_passwords: false
     ignore_missing_gateway: true
     db:
       adapter: postgres
