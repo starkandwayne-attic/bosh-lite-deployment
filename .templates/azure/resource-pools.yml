@@ -1,0 +1,30 @@
+---
+meta:
+  azure:
+    availability_set: (( param "Name of Availability Set for BOSH?" ))
+    instance_type: (( param "Instance Type for BOSH director?" ))
+    storage_account:
+      name: (( param "Set the storage account name for zone1 VMs" ))
+      type: Standard_LRS
+      # location: (( param "What location should storage accounts be placed in?" ))
+
+resource_pools:
+- name: bosh
+  cloud_properties:
+    instance_type: (( grab meta.azure.instance_type ))
+    ephemeral_disk:
+      size: 30_720 # 30 GB
+    availability_set: (( grab meta.azure.storage_account.name ))
+  network: default
+  env:
+    bosh:
+      password: (( grab meta.vcap_password ))
+  stemcell: (( grab meta.stemcell ))
+
+compilation:
+  network: default
+  workers: 3
+  reuse_compilation_vms: true
+  cloud_properties:
+    instance_type: Standard_A2_v2
+    availability_set: (( grab meta.azure.storage_account.name ))

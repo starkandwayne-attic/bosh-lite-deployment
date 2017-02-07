@@ -1,0 +1,5 @@
+---
+jobs:
+- name: bosh
+  persistant_disk_pool: default
+  resource_pool: bosh
