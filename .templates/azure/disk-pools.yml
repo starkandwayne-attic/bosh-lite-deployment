@@ -1,4 +1,4 @@
 ---
 disk_pools:
 - name: default
-  disk_size: 30_000
+  disk_size: 30_720
