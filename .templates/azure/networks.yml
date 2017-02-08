@@ -5,8 +5,8 @@ meta:
     gateway: (( param "What is the gateway of the network the BOSH-Lite will be on?" ))
     static: (( param "Provide a list of static IPs/ranges in the subnet that BOSH-Lite will choose from" ))
     reserved: (( param "Provide a list of reserved IP ranges for the subnet that BOSH-Lite will be on" ))
-    dns: (( param "What is the IP of the DNS server for this BOSH-Lite?" ))
-    subnet_id: (( param "What is the AWS subnet ID for this BOSH-Lite's subnet?")
+    dns: (( param "What are the IPs of the DNS server for this BOSH-Lite?" ))
+    subnet_id: (( param "What is the Azure subnet ID for this BOSH-Lite's subnet?")
     security_groups: (( param "What security groups should be applied to the BOSH-Lite?" ))
 
 networks:
