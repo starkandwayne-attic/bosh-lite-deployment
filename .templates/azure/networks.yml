@@ -6,15 +6,17 @@ meta:
     static: (( param "Provide a list of static IPs/ranges in the subnet that BOSH-Lite will choose from" ))
     reserved: (( param "Provide a list of reserved IP ranges for the subnet that BOSH-Lite will be on" ))
     dns: (( param "What are the IPs of the DNS server for this BOSH-Lite?" ))
-    subnet_id: (( param "What is the Azure subnet ID for this BOSH-Lite's subnet?")
-    security_groups: (( param "What security groups should be applied to the BOSH-Lite?" ))
+    subnet_name: (( param "What is the Azure subnet ID for this BOSH-Lite's subnet?" ))
+    security_group: (( param "What security group should be applied to the BOSH-Lite?" ))
+    virtual_network_name: (( param "What is the Azure Virtual Network you are deploying into?" ))
 
 networks:
 - name: default
   subnets:
   - cloud_properties:
-      subnet: (( grab meta.net.subnet_id ))
-      security_groups: (( grab meta.net.security_groups ))
+      subnet_name: (( grab meta.net.subnet_name ))
+      virtual_netowrk_name: (( grab meta.net.virtual_network_name ))
+      security_group: (( grab meta.net.security_group ))
     dns: (( grab meta.net.dns ))
     gateway: (( grab meta.net.gateway ))
     range: (( grab meta.net.range ))
