@@ -13,7 +13,7 @@ networks:
 - name: default
   subnets:
   - cloud_properties:
-      subnet: (( grab meta.net.subnet ))
+      subnet: (( grab meta.net.subnet_id ))
       security_groups: (( grab meta.net.security_groups ))
     dns: (( grab meta.net.dns ))
     gateway: (( grab meta.net.gateway ))
